@@ -17,7 +17,7 @@
 */
 
 #include "Atlas.h"
-#include "Viewer.h"
+
 
 #include "GeometricCamera.h"
 #include "Pinhole.h"
@@ -94,11 +94,7 @@ unsigned long int Atlas::GetLastInitKFid()
     return mnLastInitKFidMap;
 }
 
-void Atlas::SetViewer(Viewer* pViewer)
-{
-    mpViewer = pViewer;
-    mHasViewer = true;
-}
+
 
 void Atlas::AddKeyFrame(KeyFrame* pKF)
 {

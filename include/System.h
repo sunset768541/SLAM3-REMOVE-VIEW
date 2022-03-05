@@ -36,7 +36,6 @@
 #include "LoopClosing.h"
 #include "KeyFrameDatabase.h"
 #include "ORBVocabulary.h"
-#include "Viewer.h"
 #include "ImuTypes.h"
 #include "Settings.h"
 
@@ -71,7 +70,7 @@ public:
     }
 };
 
-class Viewer;
+
 class FrameDrawer;
 class MapDrawer;
 class Atlas;
@@ -225,7 +224,7 @@ private:
     LoopClosing* mpLoopCloser;
 
     // The viewer draws the map and the current camera pose. It uses Pangolin.
-    Viewer* mpViewer;
+
 
     FrameDrawer* mpFrameDrawer;
     MapDrawer* mpMapDrawer;
@@ -234,7 +233,7 @@ private:
     // The Tracking thread "lives" in the main execution thread that creates the System object.
     std::thread* mptLocalMapping;
     std::thread* mptLoopClosing;
-    std::thread* mptViewer;
+
 
     // Reset flag
     std::mutex mMutexReset;

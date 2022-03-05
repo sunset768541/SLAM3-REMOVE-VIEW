@@ -23,7 +23,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/features2d/features2d.hpp>
 
-#include "Viewer.h"
+
 #include "FrameDrawer.h"
 #include "Atlas.h"
 #include "LocalMapping.h"
@@ -45,7 +45,7 @@
 namespace ORB_SLAM3
 {
 
-class Viewer;
+
 class FrameDrawer;
 class Atlas;
 class LocalMapping;
@@ -77,7 +77,7 @@ public:
 
     void SetLocalMapper(LocalMapping* pLocalMapper);
     void SetLoopClosing(LoopClosing* pLoopClosing);
-    void SetViewer(Viewer* pViewer);
+
     void SetStepByStep(bool bSet);
     bool GetStepByStep();
 
@@ -278,7 +278,7 @@ protected:
     System* mpSystem;
     
     //Drawers
-    Viewer* mpViewer;
+
     FrameDrawer* mpFrameDrawer;
     MapDrawer* mpMapDrawer;
     bool bStepByStep;
