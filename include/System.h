@@ -29,8 +29,6 @@
 #include<opencv2/core/core.hpp>
 
 #include "Tracking.h"
-#include "FrameDrawer.h"
-#include "MapDrawer.h"
 #include "Atlas.h"
 #include "LocalMapping.h"
 #include "LoopClosing.h"
@@ -71,8 +69,6 @@ public:
 };
 
 
-class FrameDrawer;
-class MapDrawer;
 class Atlas;
 class Tracking;
 class LocalMapping;
@@ -226,8 +222,7 @@ private:
     // The viewer draws the map and the current camera pose. It uses Pangolin.
 
 
-    FrameDrawer* mpFrameDrawer;
-    MapDrawer* mpMapDrawer;
+
 
     // System threads: Local Mapping, Loop Closing, Viewer.
     // The Tracking thread "lives" in the main execution thread that creates the System object.

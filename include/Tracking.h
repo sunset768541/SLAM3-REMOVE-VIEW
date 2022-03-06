@@ -24,7 +24,7 @@
 #include <opencv2/features2d/features2d.hpp>
 
 
-#include "FrameDrawer.h"
+
 #include "Atlas.h"
 #include "LocalMapping.h"
 #include "LoopClosing.h"
@@ -32,7 +32,6 @@
 #include "ORBVocabulary.h"
 #include "KeyFrameDatabase.h"
 #include "ORBextractor.h"
-#include "MapDrawer.h"
 #include "System.h"
 #include "ImuTypes.h"
 #include "Settings.h"
@@ -46,7 +45,7 @@ namespace ORB_SLAM3
 {
 
 
-class FrameDrawer;
+
 class Atlas;
 class LocalMapping;
 class LoopClosing;
@@ -58,7 +57,7 @@ class Tracking
 
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-    Tracking(System* pSys, ORBVocabulary* pVoc, FrameDrawer* pFrameDrawer, MapDrawer* pMapDrawer, Atlas* pAtlas,
+    Tracking(System* pSys, ORBVocabulary* pVoc,  Atlas* pAtlas,
              KeyFrameDatabase* pKFDB, const string &strSettingPath, const int sensor, Settings* settings, const string &_nameSeq=std::string());
 
     ~Tracking();
@@ -279,8 +278,7 @@ protected:
     
     //Drawers
 
-    FrameDrawer* mpFrameDrawer;
-    MapDrawer* mpMapDrawer;
+
     bool bStepByStep;
 
     //Atlas
