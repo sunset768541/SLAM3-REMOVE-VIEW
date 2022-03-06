@@ -192,7 +192,7 @@ private:
     void SaveAtlas(int type);
     bool LoadAtlas(int type);
 
-    string CalculateCheckSum(string filename, int type);
+//    string CalculateCheckSum(string filename, int type);
 
     // Input sensor
     eSensor mSensor;

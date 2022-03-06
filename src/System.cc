@@ -22,7 +22,6 @@
 #include "Converter.h"
 #include <thread>
 #include <iomanip>
-#include <openssl/md5.h>
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -1377,7 +1376,7 @@ void System::SaveAtlas(int type){
         pathSaveFileName = pathSaveFileName.append(mStrSaveAtlasToFile);
         pathSaveFileName = pathSaveFileName.append(".osa");
 
-        string strVocabularyChecksum = CalculateCheckSum(mStrVocabularyFilePath,TEXT_FILE);
+//        string strVocabularyChecksum = CalculateCheckSum(mStrVocabularyFilePath,TEXT_FILE);
         std::size_t found = mStrVocabularyFilePath.find_last_of("/\\");
         string strVocabularyName = mStrVocabularyFilePath.substr(found+1);
 
@@ -1389,7 +1388,7 @@ void System::SaveAtlas(int type){
             boost::archive::text_oarchive oa(ofs);
 
             oa << strVocabularyName;
-            oa << strVocabularyChecksum;
+//            oa << strVocabularyChecksum;
             oa << mpAtlas;
             cout << "End to write the save text file" << endl;
         }
@@ -1400,7 +1399,7 @@ void System::SaveAtlas(int type){
             std::ofstream ofs(pathSaveFileName, std::ios::binary);
             boost::archive::binary_oarchive oa(ofs);
             oa << strVocabularyName;
-            oa << strVocabularyChecksum;
+//            oa << strVocabularyChecksum;
             oa << mpAtlas;
             cout << "End to write save binary file" << endl;
         }
@@ -1452,14 +1451,14 @@ bool System::LoadAtlas(int type)
     if(isRead)
     {
         //Check if the vocabulary is the same
-        string strInputVocabularyChecksum = CalculateCheckSum(mStrVocabularyFilePath,TEXT_FILE);
-
-        if(strInputVocabularyChecksum.compare(strVocChecksum) != 0)
-        {
-            cout << "The vocabulary load isn't the same which the load session was created " << endl;
-            cout << "-Vocabulary name: " << strFileVoc << endl;
-            return false; // Both are differents
-        }
+//        string strInputVocabularyChecksum = CalculateCheckSum(mStrVocabularyFilePath,TEXT_FILE);
+//
+//        if(strInputVocabularyChecksum.compare(strVocChecksum) != 0)
+//        {
+//            cout << "The vocabulary load isn't the same which the load session was created " << endl;
+//            cout << "-Vocabulary name: " << strFileVoc << endl;
+//            return false; // Both are differents
+//        }
 
         mpAtlas->SetKeyFrameDababase(mpKeyFrameDatabase);
         mpAtlas->SetORBVocabulary(mpVocabulary);
@@ -1469,46 +1468,46 @@ bool System::LoadAtlas(int type)
     }
     return false;
 }
-
-string System::CalculateCheckSum(string filename, int type)
-{
-    string checksum = "";
-
-    unsigned char c[MD5_DIGEST_LENGTH];
-
-    std::ios_base::openmode flags = std::ios::in;
-    if(type == BINARY_FILE) // Binary file
-        flags = std::ios::in | std::ios::binary;
-
-    ifstream f(filename.c_str(), flags);
-    if ( !f.is_open() )
-    {
-        cout << "[E] Unable to open the in file " << filename << " for Md5 hash." << endl;
-        return checksum;
-    }
-
-    MD5_CTX md5Context;
-    char buffer[1024];
-
-    MD5_Init (&md5Context);
-    while ( int count = f.readsome(buffer, sizeof(buffer)))
-    {
-        MD5_Update(&md5Context, buffer, count);
-    }
-
-    f.close();
-
-    MD5_Final(c, &md5Context );
-
-    for(int i = 0; i < MD5_DIGEST_LENGTH; i++)
-    {
-        char aux[10];
-        sprintf(aux,"%02x", c[i]);
-        checksum = checksum + aux;
-    }
-
-    return checksum;
-}
+//
+//string System::CalculateCheckSum(string filename, int type)
+//{
+//    string checksum = "";
+//
+//    unsigned char c[MD5_DIGEST_LENGTH];
+//
+//    std::ios_base::openmode flags = std::ios::in;
+//    if(type == BINARY_FILE) // Binary file
+//        flags = std::ios::in | std::ios::binary;
+//
+//    ifstream f(filename.c_str(), flags);
+//    if ( !f.is_open() )
+//    {
+//        cout << "[E] Unable to open the in file " << filename << " for Md5 hash." << endl;
+//        return checksum;
+//    }
+//
+//    MD5_CTX md5Context;
+//    char buffer[1024];
+//
+//    MD5_Init (&md5Context);
+//    while ( int count = f.readsome(buffer, sizeof(buffer)))
+//    {
+//        MD5_Update(&md5Context, buffer, count);
+//    }
+//
+//    f.close();
+//
+//    MD5_Final(c, &md5Context );
+//
+//    for(int i = 0; i < MD5_DIGEST_LENGTH; i++)
+//    {
+//        char aux[10];
+//        sprintf(aux,"%02x", c[i]);
+//        checksum = checksum + aux;
+//    }
+//
+//    return checksum;
+//}
 
 } //namespace ORB_SLAM
 
